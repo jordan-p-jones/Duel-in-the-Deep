@@ -712,6 +712,7 @@ skull:'<svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a6 6 0 0 0-6 6
 /* ================= AUDIO ================= */
 const A={
   ctx:null, master:null, noiseBuf:null, muted:LS.get('dd_mute','0')==='1', ambOn:false, hull:null,
+  hullHoldMs:3000, hullFadeSec:1.5, hullFadeTimer:null, hullDamageActive:false,
   init(){
     if(this.ctx) return;
     try{
@@ -797,10 +798,32 @@ const A={
   creak(dmg){ const pan=(rnd()*2-1)*.6;
     this.tone({f0:150+rnd()*90,f1:42,type:'sawtooth',dur:.5,vol:.028*dmg,lp:520,pan:pan});
     this.noise({ft:'bandpass',f0:320,q:3,dur:.3,vol:.02*dmg,pan:pan}); },
-  updateHull(hp){ if(!this.hull||!this.ctx) return;
-    const dmg=HP-hp, t=this.ctx.currentTime;
-    this.hull.gg.gain.setTargetAtTime(dmg*0.014,t,.4);
-    this.hull.ig.gain.setTargetAtTime(dmg>=2?(dmg-1)*0.03:0,t,.4);
+  hullLevels(hp){ const dmg=HP-hp; return [dmg*0.014, dmg>=2?(dmg-1)*0.03:0]; },
+  _holdGain(g,t){ if(g.cancelAndHoldAtTime) g.cancelAndHoldAtTime(t);
+    else { g.cancelScheduledValues(t); g.setValueAtTime(g.value,t); } },
+  _scheduleHullGain(g,target,t){
+    const holdEnd=t+this.hullHoldMs/1000;
+    this._holdGain(g,t);
+    g.linearRampToValueAtTime(target,t+.25);
+    g.setValueAtTime(target,holdEnd);
+    g.linearRampToValueAtTime(0,holdEnd+this.hullFadeSec);
+  },
+  pulseHull(hp){ if(!this.hull||!this.ctx) return;
+    if(this.hullFadeTimer){ clearTimeout(this.hullFadeTimer); this.hullFadeTimer=null; }
+    this.hullDamageActive=true;
+    const lv=this.hullLevels(hp), t=this.ctx.currentTime;
+    this._scheduleHullGain(this.hull.gg.gain,lv[0],t);
+    this._scheduleHullGain(this.hull.ig.gain,lv[1],t);
+    this.hullFadeTimer=setTimeout(()=>{ this.hullDamageActive=false; this.hullFadeTimer=null; },this.hullHoldMs);
+  },
+  fadeHullDamage(){ if(!this.hull||!this.ctx) return;
+    if(this.hullFadeTimer){ clearTimeout(this.hullFadeTimer); this.hullFadeTimer=null; }
+    this.hullDamageActive=false;
+    const t=this.ctx.currentTime;
+    for(const g of [this.hull.gg.gain,this.hull.ig.gain]){
+      this._holdGain(g,t);
+      g.linearRampToValueAtTime(0,t+this.hullFadeSec);
+    }
   },
   victory(){ const ns=[392,523,659,784];
     ns.forEach((f,i)=>{ this.tone({at:i*.16,f0:f,type:'triangle',dur:.4,vol:.12});
@@ -830,7 +853,7 @@ const A={
     const ig=this.ctx.createGain(); ig.gain.value=0;
     ing.connect(inf); inf.connect(ig); ig.connect(this.master); ing.start();
     this.hull={gg,ig};
-    setInterval(()=>{ if(this.ctx&&!this.muted&&S.subs&&S.phase==='playing'){
+    setInterval(()=>{ if(this.ctx&&!this.muted&&S.subs&&S.phase==='playing'&&this.hullDamageActive){
       const dmg=HP-subOf(S.view).hp; if(dmg>0&&rnd()<dmg*0.2) this.creak(dmg); } },800);
     setInterval(()=>{ if(this.ctx&&!this.muted&&rnd()<.5) this.ping(.03,true,(rnd()*2-1)*.7); },12000);
   }
@@ -1005,7 +1028,7 @@ function damage(sub,n,type,srcSide){
   popFx(sub.x,sub.y,'-'+n+' '+(type==='direct'?'DIRECT':'BLAST'),sub.side==='player'?COLORS.red:COLORS.amber);
   st(sub.side).taken+=n;
   if(srcSide) st(srcSide).hits++;
-  if(sub.side===S.view){ B.hurt=1; A.hit(); A.creak(HP-sub.hp+1); }
+  if(sub.side===S.view){ B.hurt=1; A.hit(); A.creak(HP-sub.hp+1); A.pulseHull(sub.hp); }
   log((type==='direct'?'DIRECT HIT on ':'Blast damage to ')+SIDE_NAME[sub.side]+' — hull '+sub.hp+'/3', sub.side===S.view?'hit':'good');
   refreshHull();
 }
@@ -1756,7 +1779,6 @@ function refreshHull(){
   };
   mk($('hullOwn'),S.subs.player.hp,false);
   mk($('hullEnemy'),S.subs.enemy.hp,true);
-  A.updateHull(subOf(S.view||'player').hp);
 }
 function refreshUI(){
   if(!S.subs) return;
@@ -1930,7 +1952,7 @@ function newMatch(){
   $('modeTag').textContent=S.mode==='hotseat'?'HOT-SEAT':'SOLO';
   $('diffTag').textContent=S.mode==='hotseat'?'HUMAN VS HUMAN':DIFF[S.diff].label;
   if(S.mode==='solo') Career.start();
-  A.updateHull(HP);
+  A.fadeHullDamage();
   log((S.mode==='hotseat'?'HOT-SEAT DUEL':'PATROL')+' commenced'+(S.mode==='solo'?' — engagement level '+DIFF[S.diff].label:'')+'.','warn');
   log('Loadout each: 3 torpedoes + 1 decoy loaded · 5 mines · 4 decoys total.','sys');
   buildTubes();
@@ -1948,7 +1970,7 @@ function toMenu(){
   $('briefOverlay').classList.add('hidden');
   $('handoffOverlay').classList.add('hidden');
   $('menuScreen').classList.remove('hidden');
-  A.updateHull(HP);
+  A.fadeHullDamage();
   renderMenuRecord();
   resizeMenu();
 }
