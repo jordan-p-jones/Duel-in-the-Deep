@@ -140,6 +140,7 @@ button{font-family:var(--mono); cursor:pointer; touch-action:manipulation}
 .top-btn.snd.muted{color:var(--steel-dim)}
 .top-btn.danger:hover{border-color:var(--red);color:var(--red)}
 #btnLayout{color:var(--amber);border-color:rgba(255,179,71,.35)}
+#btnSheet.on{background:linear-gradient(180deg,#17c9ad,#0e9a84);color:#032019;border-color:#7dffe9}
 
 /* mobile-only shells hidden on desktop */
 #mobileStatus,#contextBar,#sheetScrim,.sheet-only{display:none}
@@ -217,8 +218,12 @@ button{font-family:var(--mono); cursor:pointer; touch-action:manipulation}
 #turnBanner.red{background:linear-gradient(90deg,rgba(150,30,22,.92),rgba(255,68,56,.8));color:#ffe9e7;border:1px solid #ff9d95;box-shadow:0 0 30px rgba(255,68,56,.5)}
 #turnBanner.green{background:linear-gradient(90deg,rgba(10,120,70,.92),rgba(61,255,156,.75));color:#032019;border:1px solid #a0ffd0;box-shadow:0 0 30px rgba(61,255,156,.5)}
 @keyframes bannerIn{0%{opacity:0;transform:translateX(-50%) translateY(-18px)}12%{opacity:1;transform:translateX(-50%) translateY(0)}80%{opacity:1;transform:translateX(-50%) translateY(0)}100%{opacity:0;transform:translateX(-50%) translateY(-8px)}}
-#deployBar{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:7;display:flex;align-items:center;gap:10px;
-  background:linear-gradient(180deg,rgba(13,42,68,.96),rgba(8,28,48,.96));border:1px solid var(--line2);padding:10px 14px;box-shadow:0 8px 30px rgba(0,0,0,.6);max-width:94%;flex-wrap:wrap;justify-content:center}
+
+/* deploy bar sits OPPOSITE the active deployment zone so the zone stays tappable */
+#deployBar{position:absolute;left:50%;transform:translateX(-50%);z-index:7;display:flex;align-items:center;gap:10px;
+  background:linear-gradient(180deg,rgba(13,42,68,.97),rgba(8,28,48,.97));border:1px solid var(--line2);padding:10px 14px;box-shadow:0 8px 30px rgba(0,0,0,.65);max-width:94%;flex-wrap:wrap;justify-content:center;top:14px;bottom:auto}
+#deployBar.at-top{top:14px;bottom:auto}
+#deployBar.at-bottom{bottom:14px;top:auto}
 #deployText{font-size:11.5px;letter-spacing:.1em;color:var(--ice);text-align:center}
 #deployText b{font-weight:normal}
 .dbtn{font-family:var(--stencil);font-size:12px;letter-spacing:.1em;padding:9px 16px;background:linear-gradient(180deg,#123452,#0a2136);border:1px solid var(--line2);color:var(--ice);transition:all .15s}
@@ -310,22 +315,20 @@ button{font-family:var(--mono); cursor:pointer; touch-action:manipulation}
 .ctx-chip.hot{border-color:rgba(25,227,194,.6);color:var(--teal);animation:lampPulse 1.2s infinite}
 .ctx-chip.armed{border-color:rgba(255,179,71,.6);color:var(--amber)}
 .ctx-chip.mv{border-color:rgba(63,155,255,.6);color:var(--blue)}
-.ctxbtn{height:40px;min-width:52px;padding:0 10px;background:linear-gradient(180deg,#123452,#0a2136);border:1px solid var(--line2);color:var(--ice);font-size:10px;letter-spacing:.12em;transition:all .12s}
+.ctxbtn{height:40px;min-width:50px;padding:0 9px;background:linear-gradient(180deg,#123452,#0a2136);border:1px solid var(--line2);color:var(--ice);font-size:10px;letter-spacing:.1em;transition:all .12s}
 .ctxbtn:hover:not(:disabled){border-color:var(--teal)}
 .ctxbtn:disabled{opacity:.32;cursor:not-allowed}
 .ctxbtn.on{background:linear-gradient(180deg,#17c9ad,#0e9a84);color:#032019;border-color:#7dffe9}
 .ctxbtn.cancel{border-color:rgba(255,68,56,.45);color:#ffb9b3}
 .dpad{display:flex;gap:4px}
-.dpad button{width:44px;height:40px;display:flex;align-items:center;justify-content:center;font-size:17px;line-height:1;
+.dpad button{width:42px;height:40px;display:flex;align-items:center;justify-content:center;font-size:17px;line-height:1;
   background:linear-gradient(180deg,#173d5e,#0d2a44);border:1px solid var(--line2);color:var(--ice);transition:all .1s}
 .dpad button:hover:not(:disabled){border-color:var(--teal);box-shadow:0 0 12px rgba(25,227,194,.3)}
 .dpad button:active:not(:disabled){transform:translateY(1px);background:linear-gradient(180deg,#17c9ad,#0e9a84);color:#032019}
+.dpad button.on{background:linear-gradient(180deg,#2f7fd6,#1f5fae);border-color:#7cc0ff;color:#eaf6ff;box-shadow:0 0 12px rgba(63,155,255,.45)}
 .dpad button:disabled{opacity:.22;cursor:not-allowed}
-.ctx-label{font-size:9.5px;letter-spacing:.12em;color:var(--teal);white-space:nowrap;min-width:56px}
-.stepper{display:flex;align-items:center;border:1px solid var(--line2);background:#081a2c}
-.stepper button{width:34px;height:40px;background:transparent;border:none;color:var(--ice);font-size:17px}
-.stepper button:hover{color:var(--teal)}
-.stepper span{min-width:24px;text-align:center;font-family:var(--stencil);font-size:15px;color:var(--amber)}
+.ctx-label{font-size:10px;letter-spacing:.1em;color:var(--teal);white-space:nowrap;min-width:62px}
+.ctx-label.mv{color:var(--blue)}
 
 /* ============ OVERLAYS ============ */
 .overlay{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(2,7,13,.8);backdrop-filter:blur(4px);animation:ovIn .25s}
@@ -383,6 +386,7 @@ button{font-family:var(--mono); cursor:pointer; touch-action:manipulation}
 
 /* ============ COMPACT (mobile) LAYOUT ============ */
 html[data-layout="mobile"] body{overflow:hidden;overscroll-behavior:none}
+html[data-layout="mobile"] #crt{opacity:.32}
 html[data-layout="mobile"] #gameScreen{position:fixed;top:0;left:0;right:0;bottom:auto;height:100dvh;overflow:hidden}
 html[data-layout="mobile"] #topbar{height:auto;min-height:46px;padding:6px 8px;gap:6px}
 html[data-layout="mobile"] .brand-txt{display:none}
@@ -424,29 +428,44 @@ html[data-layout="mobile"] #hintbar{height:auto;min-height:26px;padding:5px 10px
 html[data-layout="mobile"] #hintText{font-size:10px}
 html[data-layout="mobile"] #coordChip,html[data-layout="mobile"] #noiseChip{display:none}
 html[data-layout="mobile"] #turnBanner{font-size:13px;padding:7px 16px;top:12px;letter-spacing:.12em}
-html[data-layout="mobile"] #deployBar{bottom:10px;padding:8px 10px;gap:8px}
-html[data-layout="mobile"] #deployText{font-size:10px}
-html[data-layout="mobile"] .dbtn{font-size:11px;padding:10px 14px}
+html[data-layout="mobile"] #deployBar{padding:8px 10px;gap:8px;max-width:96%}
+html[data-layout="mobile"] #deployBar.at-top{top:8px}
+html[data-layout="mobile"] #deployBar.at-bottom{bottom:8px}
+html[data-layout="mobile"] #deployText{font-size:10px;flex-basis:100%}
+html[data-layout="mobile"] .dbtn{font-size:11px;padding:10px 16px}
 html[data-layout="mobile"] .brief-grid{grid-template-columns:1fr}
 html[data-layout="mobile"] #overStats{grid-template-columns:repeat(2,1fr)}
 
-/* sheet */
-html[data-layout="mobile"] #sheetScrim{display:block;position:fixed;inset:0;z-index:34;background:rgba(2,7,13,.66);backdrop-filter:blur(2px);animation:ovIn .18s}
-html[data-layout="mobile"] #sheetScrim.hidden{display:none}
+/* sheet — lives inside #gameScreen so it shares its stacking context */
+html[data-layout="mobile"] #sheetScrim{display:block;position:fixed;inset:0;z-index:34;background:rgba(2,7,13,.5);animation:ovIn .18s}
+html[data-layout="mobile"] #gameScreen.sheet-open #topbar{z-index:36}
 html[data-layout="mobile"] #rightPanel{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:35;
-  height:min(66dvh,520px);transform:translateY(105%);transition:transform .2s cubic-bezier(.2,.8,.3,1);
-  border-left:none;border-right:none;border-bottom:none;border-top:2px solid var(--line2);
-  background:linear-gradient(180deg,#0d2a44,#050f1c);box-shadow:0 -12px 40px rgba(0,0,0,.7);
+  height:min(70dvh,560px);transform:translateY(105%);transition:transform .22s cubic-bezier(.2,.8,.3,1);
+  border-left:none;border-right:none;border-bottom:none;border-top:2px solid var(--blue);
+  background:linear-gradient(180deg,#123452 0%,#0d2a44 42%,#0a2136 100%);
+  box-shadow:0 -14px 44px rgba(0,0,0,.75);
   touch-action:pan-y;padding-bottom:var(--safe-b)}
 html[data-layout="mobile"] #rightPanel.open{transform:none}
-html[data-layout="mobile"] #rightPanel .panel-head{padding:10px 12px;gap:8px}
+html[data-layout="mobile"] #rightPanel .panel-head{padding:10px 12px;gap:8px;background:#0d2a44;border-bottom:1px solid var(--line2)}
 html[data-layout="mobile"] #rightPanel .panel-head h2{font-size:12px;color:var(--ice);flex:1}
 html[data-layout="mobile"] #rightPanel .panel-head .standby{display:none}
-html[data-layout="mobile"] .sheet-only{display:flex;align-items:center;justify-content:center;height:34px;min-width:38px;padding:0 9px;
-  background:#0a2136;border:1px solid var(--line2);color:var(--steel);font-size:11px;letter-spacing:.1em}
-html[data-layout="mobile"] .sheet-only.danger{color:#ffb9b3;border-color:rgba(255,68,56,.4)}
-html[data-layout="mobile"] #rightPanel .panel-body{padding:10px;display:flex;flex-direction:column;gap:8px}
-html[data-layout="mobile"] #logBox{height:132px}
+html[data-layout="mobile"] .sheet-only{display:flex;align-items:center;justify-content:center;height:36px;min-width:40px;padding:0 10px;
+  background:#123452;border:1px solid var(--line2);color:var(--ice);font-size:11px;letter-spacing:.1em}
+html[data-layout="mobile"] .sheet-only.danger{color:#ffb9b3;border-color:rgba(255,68,56,.45)}
+html[data-layout="mobile"] #rightPanel .panel-body{padding:10px;display:flex;flex-direction:column;gap:9px}
+html[data-layout="mobile"] #rightPanel .widget{background:rgba(8,24,40,.94);border-color:#2c5a80}
+html[data-layout="mobile"] #rightPanel .w-head{color:#a9c8de;font-size:10.5px}
+html[data-layout="mobile"] #rightPanel .w-head .w-tag{color:#7fa3bd}
+html[data-layout="mobile"] #rightPanel .ln{font-size:11px;color:#a3c1d6}
+html[data-layout="mobile"] #rightPanel .ln .lt{color:#6f8fa6}
+html[data-layout="mobile"] #rightPanel .lg-row{font-size:9.5px;color:#93b3c9}
+html[data-layout="mobile"] #rightPanel .lamp-row{font-size:10.5px;color:#93b3c9}
+html[data-layout="mobile"] #rightPanel .plot-note,html[data-layout="mobile"] #rightPanel .noise-note{color:#7593aa}
+html[data-layout="mobile"] #rightPanel .hull-label{color:#a9c8de}
+html[data-layout="mobile"] #rightPanel .ptool{font-size:10.5px;padding:9px 6px;color:#bcd6e8}
+html[data-layout="mobile"] #rightPanel .run-row{font-size:11px;padding:8px;color:#bcd6e8}
+html[data-layout="mobile"] #rightPanel .ord-name{color:#7593aa}
+html[data-layout="mobile"] #logBox{height:150px}
 
 /* compact landscape: board left, controls right rail */
 html[data-layout="mobile"][data-orient="landscape"] #gameMain{
@@ -462,7 +481,7 @@ html[data-layout="mobile"][data-orient="landscape"] .ctx-panel{flex-wrap:wrap}
 html[data-layout="mobile"][data-orient="landscape"] #ctxChips{flex-basis:100%;order:3}
 html[data-layout="mobile"][data-orient="landscape"] .dpad button{width:38px;height:36px;font-size:15px}
 html[data-layout="mobile"][data-orient="landscape"] .ctxbtn{height:36px;min-width:44px}
-html[data-layout="mobile"][data-orient="landscape"] .stepper button{height:36px;width:28px}
+html[data-layout="mobile"][data-orient="landscape"] .ctx-label{min-width:52px;font-size:9px}
 
 @media (max-width:660px){
   .menu-transmission{display:none}
@@ -520,7 +539,7 @@ html[data-layout="mobile"][data-orient="landscape"] .stepper button{height:36px;
     <div>ORDERS: LOCATE AND DESTROY HOSTILE SSN.</div>
     <div class="tx-r">SILENCE IS SURVIVAL. NOISE IS DEATH.</div>
   </div>
-  <div class="menu-ver">DUEL IN THE DEEP · v1.4 · SINGLE-FILE BUILD</div>
+  <div class="menu-ver">DUEL IN THE DEEP · v1.5 · SINGLE-FILE BUILD</div>
 </section>
 
 <!-- ==================== GAME ==================== -->
@@ -584,7 +603,7 @@ html[data-layout="mobile"][data-orient="landscape"] .stepper button{height:36px;
     <div id="boardWrap">
       <canvas id="board"></canvas>
       <div id="turnBanner"></div>
-      <div id="deployBar" class="hidden">
+      <div id="deployBar" class="hidden at-top">
         <span id="deployText"></span>
         <button class="dbtn" id="btnDeployRandom">RANDOM</button>
         <button class="dbtn go" id="btnDeployConfirm">CONFIRM DEPLOY</button>
@@ -602,8 +621,8 @@ html[data-layout="mobile"][data-orient="landscape"] .stepper button{height:36px;
         <span class="ctx-label" id="ctxGuideLabel">GUIDE · 5</span>
         <div class="dpad" id="guidePad">
           <button data-dir="left" title="Port">◀</button>
-          <button data-dir="up" title="Forward">▲</button>
-          <button data-dir="down" title="Astern">▼</button>
+          <button data-dir="up" title="Up">▲</button>
+          <button data-dir="down" title="Down">▼</button>
           <button data-dir="right" title="Starboard">▶</button>
         </div>
         <div class="top-spacer"></div>
@@ -616,7 +635,7 @@ html[data-layout="mobile"][data-orient="landscape"] .stepper button{height:36px;
           <button data-dir="down">▼</button>
           <button data-dir="right">▶</button>
         </div>
-        <div class="stepper"><button id="mvMinus">−</button><span id="mvDist">2</span><button id="mvPlus">+</button></div>
+        <span class="ctx-label mv" id="moveReadout">HEADING?</span>
         <div class="top-spacer"></div>
         <button class="ctxbtn" id="btnCtxMoveDone">DONE</button>
       </div>
@@ -703,9 +722,9 @@ html[data-layout="mobile"][data-orient="landscape"] .stepper button{height:36px;
     <span class="chip" id="coordChip">GRID ——</span>
     <span class="chip" id="noiseChip">NOISE +0</span>
   </footer>
-</section>
 
-<div id="sheetScrim" class="hidden"></div>
+  <div id="sheetScrim" class="hidden"></div>
+</section>
 
 <!-- ==================== BRIEFING ==================== -->
 <div class="overlay hidden" id="briefOverlay">
@@ -716,7 +735,7 @@ html[data-layout="mobile"][data-orient="landscape"] .stepper button{height:36px;
         <div class="brief-sec brief-wide">
           <h3><span class="hicon">◈</span>OBJECTIVE &amp; MODES</h3>
           <p>Two submarines hunt each other across a <b>30×20</b> grid. Each boat has <b>3 HP</b>. <span class="bl">BLUE</span> deploys in the bottom three rows, <span class="rd">RED</span> in the top three. Direct hits deal <b>2 damage</b>, indirect (adjacent blast) deals <b>1</b>; explosions chain through nearby torpedoes and mines.</p>
-          <p><b>SOLO PATROL</b> — you command BLUE against the computer. <b>HOT-SEAT DUEL</b> — two humans share one screen as BLUE and RED; an opaque hand-off screen hides the chart between turns so neither player sees the other's private picture. Before every match, each commander <b>picks their own starting tile</b> inside their deployment zone.</p>
+          <p><b>SOLO PATROL</b> — you command BLUE against the computer. <b>HOT-SEAT DUEL</b> — two humans share one screen as BLUE and RED; an opaque hand-off screen hides the chart between turns so neither player sees the other's private picture. Before every match, each commander <b>picks their own starting tile</b> inside their deployment zone — the deployment panel always sits on the far side of the chart so your zone stays clear.</p>
         </div>
         <div class="brief-sec">
           <h3><span class="hicon">◈</span>THE TURN</h3>
@@ -759,8 +778,8 @@ html[data-layout="mobile"][data-orient="landscape"] .stepper button{height:36px;
         </div>
         <div class="brief-sec">
           <h3><span class="hicon">◈</span>CONTROLS · DESKTOP &amp; TOUCH</h3>
-          <p><b>Desktop:</b> <span class="kbd">1–4</span> tubes · <span class="kbd">R</span> reload · <span class="kbd">M</span> mine · <span class="kbd">S</span> sonar · <span class="kbd">L</span> launch · <span class="kbd">ENTER</span> end turn · <span class="kbd">P</span> plot · <span class="kbd">H</span> history · <span class="kbd">ESC</span> / right-click cancel.</p>
-          <p><b>Touch:</b> the interface switches to COMPACT automatically. The strip above the chart carries turn, both hulls and live noise. The bar below the chart carries a <b>direction pad</b> — during torpedo guidance it steps the run one cell per tap, and <b>MOVE</b> opens a heading pad with a 1–4 distance stepper. <b>CANCEL</b> replaces right-click. <b>MORE</b> opens the sonar station sheet. Use the <b>AUTO / COMPACT / FULL</b> button in the top bar to force either interface at any time.</p>
+          <p><b>Desktop:</b> <span class="kbd">1–4</span> tubes · <span class="kbd">R</span> reload · <span class="kbd">M</span> mine · <span class="kbd">S</span> sonar · <span class="kbd">L</span> launch · <span class="kbd">ENTER</span> end turn · <span class="kbd">P</span> plot · <span class="kbd">H</span> history · <span class="kbd">ESC</span> / right-click cancel · arrow keys step a guided torpedo or plot a heading.</p>
+          <p><b>Touch:</b> the interface switches to COMPACT automatically. The strip above the chart carries turn, both hulls and live noise. During torpedo guidance the direction pad steps the run one cell per tap. <b>MOVE</b> opens the heading pad: <b>tap an arrow to head that way, tap it again to extend one more cell</b> (max 4), tap the opposite arrow to shorten by one, and tap a perpendicular arrow to switch heading. Shorten to zero to clear the move. <b>CANCEL</b> replaces right-click, <b>MORE</b> opens the sonar station sheet, and <b>AUTO / COMPACT / FULL</b> forces either interface.</p>
         </div>
       </div>
     </div>
@@ -814,7 +833,7 @@ html[data-layout="mobile"][data-orient="landscape"] .stepper button{height:36px;
 (function(){
 'use strict';
 /* ============================================================
-   DUEL IN THE DEEP — single-file submarine board duel  v1.4
+   DUEL IN THE DEEP — single-file submarine board duel  v1.5
    ============================================================ */
 const COLS=30, ROWS=20, HP=3;
 const $=id=>document.getElementById(id);
@@ -828,6 +847,7 @@ const key=(x,y)=>x+','+y;
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
 const DIRS=[[1,0],[-1,0],[0,1],[0,-1]];
 const DIRV={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]};
+const dirLabel=d=>d[1]===-1?'UP':d[1]===1?'DOWN':d[0]===-1?'LEFT':'RIGHT';
 const LS={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:v;}catch(e){return d;}},set(k,v){try{localStorage.setItem(k,v);}catch(e){}}};
 const rowName=y=>String.fromCharCode(65+y);
 const gridName=(x,y)=>String(x+1).padStart(2,'0')+'·'+rowName(y);
@@ -874,8 +894,19 @@ function computeLayout(force){
   }
 }
 const isCompact=()=>LAYOUT.mode==='mobile';
-function openSheet(){ if(!isCompact())return; $('rightPanel').classList.add('open'); $('sheetScrim').classList.remove('hidden'); }
-function closeSheet(){ const r=$('rightPanel'); if(r) r.classList.remove('open'); const s=$('sheetScrim'); if(s) s.classList.add('hidden'); }
+function openSheet(){
+  if(!isCompact())return;
+  $('rightPanel').classList.add('open');
+  $('sheetScrim').classList.remove('hidden');
+  $('gameScreen').classList.add('sheet-open');
+  $('btnSheet').classList.add('on');
+}
+function closeSheet(){
+  const r=$('rightPanel'); if(r) r.classList.remove('open');
+  const s=$('sheetScrim'); if(s) s.classList.add('hidden');
+  const g=$('gameScreen'); if(g) g.classList.remove('sheet-open');
+  const b=$('btnSheet'); if(b) b.classList.remove('on');
+}
 function sheetOpen(){ return isCompact()&&$('rightPanel').classList.contains('open'); }
 
 /* ================= SVG ICONS ================= */
@@ -964,6 +995,7 @@ const A={
   click(){ this.tone({f0:950,type:'square',dur:.045,vol:.045,lp:2400}); },
   select(){ this.tone({f0:660,f1:920,type:'square',dur:.08,vol:.05,lp:2600}); },
   desel(){ this.tone({f0:880,f1:520,type:'square',dur:.08,vol:.04,lp:2400}); },
+  step(up){ this.tone({f0:up?720:520,f1:up?960:400,type:'square',dur:.06,vol:.045,lp:2600}); },
   tick(vol,pan){ this.tone({f0:1500,type:'sine',dur:.03,vol:vol||.035,pan:pan}); },
   engine(d,v,pan){ this.tone({f0:52,f1:36,type:'sawtooth',dur:.22+.09*d,vol:v||.11,lp:180,pan:pan});
     this.noise({ft:'lowpass',f0:300,f1:120,dur:.3+.08*d,vol:(v||.11)*.5,pan:pan}); },
@@ -1448,6 +1480,12 @@ function launchReady(side){
 }
 function canEndTurn(){ return humanTurn()&&pendingTorps(S.side).length===0; }
 function movePadAllowed(){ const sel=selOf(S.side); return humanTurn()&&!S.plotMode&&!sel.torp&&(!sel.action||sel.locked); }
+function moveVector(side){
+  const sel=selOf(side), p=subOf(side);
+  if(!sel.move) return {h:null,d:0};
+  const ax=sel.move.x-p.sx, ay=sel.move.y-p.sy;
+  return {h:[Math.sign(ax),Math.sign(ay)], d:Math.abs(ax)+Math.abs(ay)};
+}
 
 function cancelReload(){
   const side=S.side, sel=selOf(side);
@@ -1608,19 +1646,31 @@ function togglePlot(x,y){
   refreshUI();
 }
 
-/* ================= MOVE PAD ================= */
+/* ================= MOVE PAD (repeat-tap heading) =================
+   same arrow  -> extend one cell (max 4)
+   opposite    -> shorten one cell (to zero = clear)
+   other arrow -> switch heading, distance 1                        */
 function plotMoveDir(dx,dy){
   if(!movePadAllowed()) return;
   const side=S.side, sel=selOf(side), p=subOf(side), mc=legalMoveCells(side);
+  const mv=moveVector(side);
+  let nh,nd,grew;
+  if(!mv.h){ nh=[dx,dy]; nd=1; grew=true; }
+  else if(mv.h[0]===dx&&mv.h[1]===dy){ nh=mv.h; nd=Math.min(4,mv.d+1); grew=nd>mv.d; }
+  else if(mv.h[0]===-dx&&mv.h[1]===-dy){ nh=mv.h; nd=mv.d-1; grew=false; }
+  else { nh=[dx,dy]; nd=1; grew=true; }
+  if(nd<=0){
+    if(sel.move){ sel.move=null; A.step(false); buzz(6); }
+    refreshUI(); return;
+  }
   let best=null;
-  for(let i=S.moveDist;i>=1;i--){
-    const c={x:p.sx+dx*i,y:p.sy+dy*i};
+  for(let i=nd;i>=1;i--){
+    const c={x:p.sx+nh[0]*i,y:p.sy+nh[1]*i};
     if(mc.some(l=>l.x===c.x&&l.y===c.y)){ best=c; break; }
   }
-  if(!best){ A.desel(); return; }
-  if(sel.move&&sel.move.x===best.x&&sel.move.y===best.y){ sel.move=null; A.desel(); }
-  else{ sel.move=best; A.click(); buzz(8); }
-  refreshUI();
+  if(!best){ A.desel(); refreshUI(); return; }
+  if(sel.move&&sel.move.x===best.x&&sel.move.y===best.y){ A.desel(); refreshUI(); return; }
+  sel.move=best; A.step(grew); buzz(8); refreshUI();
 }
 
 /* ================= BOARD INPUT ================= */
@@ -1700,7 +1750,7 @@ function boardClick(ev){
     const c=pickCell(ev,legalMoveCells(side));
     if(c){
       if(sel.move&&sel.move.x===c.x&&sel.move.y===c.y){ sel.move=null; A.desel(); }
-      else{ sel.move={x:c.x,y:c.y}; S.moveDist=clamp(Math.abs(c.x-p.sx)+Math.abs(c.y-p.sy),1,4); A.click(); buzz(8); }
+      else{ sel.move={x:c.x,y:c.y}; A.click(); buzz(8); }
       refreshUI();
     }
   }
@@ -1710,6 +1760,11 @@ function boardClick(ev){
 function refreshSetup(){
   const [z0,z1]=zoneRows(S.setupSide);
   const nm=SIDE_NAME[S.setupSide];
+  const bar=$('deployBar');
+  const zoneAtBottom=z0>=ROWS/2;
+  bar.classList.toggle('at-top',zoneAtBottom);
+  bar.classList.toggle('at-bottom',!zoneAtBottom);
+  $('turnBanner').classList.remove('show');
   $('deployText').innerHTML='DEPLOY <b style="color:'+SIDE_COL[S.setupSide]+'">'+nm+'</b> — rows '+rowName(z0)+'–'+rowName(z1)+' · <b>'+gridName(S.setupPick.x,S.setupPick.y)+'</b>';
   hint('DEPLOY '+nm+' — tap a highlighted tile in your zone, then CONFIRM DEPLOY.');
   refreshUI();
@@ -1737,7 +1792,7 @@ function confirmDeploy(){
       showHandoff('enemy',()=>{
         S.setupSide='enemy'; S.view='enemy';
         const e=subOf('enemy'); S.setupPick={x:e.x,y:e.y};
-        refreshSetup();
+        resizeBoard(); refreshSetup();
       });
     }else{
       showHandoff('player',()=>beginPlay());
@@ -2046,15 +2101,23 @@ function renderContext(){
     document.querySelectorAll('#guidePad button').forEach(b=>{
       const d=DIRV[b.dataset.dir];
       b.disabled=!legal.some(l=>l.x===tp.x+d[0]&&l.y===tp.y+d[1]);
+      b.classList.remove('on');
     });
     return;
   }
   if(moving){
-    $('mvDist').textContent=String(S.moveDist);
-    const mc=legalMoveCells(side), p=subOf(side);
+    const p=subOf(side), mc=legalMoveCells(side), mv=moveVector(side);
+    $('moveReadout').textContent=mv.h?(dirLabel(mv.h)+' '+mv.d):'HEADING?';
     document.querySelectorAll('#movePad button').forEach(b=>{
-      const d=DIRV[b.dataset.dir];
-      b.disabled=!mc.some(l=>l.x===p.sx+d[0]&&l.y===p.sy+d[1]);
+      const dv=DIRV[b.dataset.dir];
+      const same=!!mv.h&&dv[0]===mv.h[0]&&dv[1]===mv.h[1];
+      const opp=!!mv.h&&dv[0]===-mv.h[0]&&dv[1]===-mv.h[1];
+      let ok;
+      if(same) ok=mv.d<4&&mc.some(l=>l.x===p.sx+dv[0]*(mv.d+1)&&l.y===p.sy+dv[1]*(mv.d+1));
+      else if(opp) ok=mv.d>0;
+      else ok=mc.some(l=>l.x===p.sx+dv[0]&&l.y===p.sy+dv[1]);
+      b.disabled=!ok;
+      b.classList.toggle('on',same);
     });
     return;
   }
@@ -2092,8 +2155,7 @@ function refreshUI(){
   const sel=selOf(uiSide), tubes=tubesOf(uiSide), res=resOf(uiSide);
   const human=humanTurn();
   const setup=S.phase==='setup';
-  const turnTxt='TURN '+String(Math.max(1,S.turn)).padStart(2,'0');
-  $('turnNum').textContent=turnTxt;
+  $('turnNum').textContent='TURN '+String(Math.max(1,S.turn)).padStart(2,'0');
   const lamp=$('turnLamp');
   let labelTxt,redLamp;
   if(setup){ labelTxt='DEPLOY '+SIDE_NAME[S.setupSide]; redLamp=S.setupSide!=='player'; }
@@ -2168,7 +2230,7 @@ function refreshUI(){
         else if(a&&a.kind==='mine') hint('Pick one of the 8 adjacent cells for the mine, then LAUNCH.');
         else if(a&&a.kind==='sonar') hint('Sonar armed — LAUNCH to ping radius 8. Warning: +8 noise.');
         else if(sel.locked) hint('Action locked. Plot a move if desired, then END TURN.');
-        else if(S.movePad) hint('MOVE pad — pick a heading, adjust distance 1–4, then DONE.');
+        else if(S.movePad) hint('MOVE — tap a heading, tap again to extend, opposite to shorten. DONE closes.');
         else hint('Plot a move (straight, up to 4) or arm an action. Silence keeps you hidden.');
       }
     }
@@ -2258,7 +2320,7 @@ function newMatch(){
     plotsBy:{player:[],enemy:[]}, historyBy:{player:[],enemy:[]},
     plotMode:false, plotKind:'contact', showHistory:true, nextPlotId:1,
     plotSeq:{contact:0,danger:0,nav:0},
-    movePad:false, moveDist:2,
+    movePad:false,
     nextId:1
   },keep);
   B.wakes=[]; B.fadeEsts=[]; B.shake=0; B.hurt=0; B.hover=null;
@@ -2605,7 +2667,7 @@ function drawBoard(t,dt){
   const sel=selOf(V);
   if(setup){
     const [z0,z1]=zoneRows(S.setupSide);
-    c.fillStyle='rgba(255,255,255,.10)';
+    c.fillStyle='rgba(255,255,255,.12)';
     c.fillRect(m.ox,m.oy+z0*m.cell,m.bw,(z1-z0+1)*m.cell);
     c.strokeStyle=SIDE_COL[S.setupSide]; c.lineWidth=1.5; c.setLineDash([6,4]);
     c.strokeRect(m.ox+1,m.oy+z0*m.cell+1,m.bw-2,(z1-z0+1)*m.cell-2);
@@ -3046,9 +3108,7 @@ $('btnClearPlots').addEventListener('click',()=>{ if(!S.subs) return; S.plotsBy[
 document.querySelectorAll('#plotKindSeg button').forEach(b=>{
   b.addEventListener('click',()=>{ if(!S.subs) return; S.plotKind=b.dataset.kind; A.click(); refreshUI(); });
 });
-$('btnCtxMove').addEventListener('click',()=>{ if(!movePadAllowed())return; S.movePad=true; const sel=selOf(S.side);
-  if(sel.move){ const p=subOf(S.side); S.moveDist=clamp(Math.abs(sel.move.x-p.sx)+Math.abs(sel.move.y-p.sy),1,4); }
-  A.select(); refreshUI(); });
+$('btnCtxMove').addEventListener('click',()=>{ if(!movePadAllowed())return; S.movePad=true; A.select(); refreshUI(); });
 $('btnCtxMoveDone').addEventListener('click',()=>{ S.movePad=false; A.desel(); refreshUI(); });
 $('btnCtxPlot').addEventListener('click',()=>{ if(S.phase==='playing') setPlotMode(!S.plotMode); });
 $('btnCtxCancel').addEventListener('click',cancelSel);
@@ -3059,8 +3119,6 @@ document.querySelectorAll('#guidePad button').forEach(b=>{
 document.querySelectorAll('#movePad button').forEach(b=>{
   b.addEventListener('click',()=>{ const d=DIRV[b.dataset.dir]; plotMoveDir(d[0],d[1]); });
 });
-$('mvMinus').addEventListener('click',()=>{ S.moveDist=clamp(S.moveDist-1,1,4); A.click(); refreshUI(); });
-$('mvPlus').addEventListener('click',()=>{ S.moveDist=clamp(S.moveDist+1,1,4); A.click(); refreshUI(); });
 
 let resetTimer=null;
 $('btnResetRecord').addEventListener('click',function(){
