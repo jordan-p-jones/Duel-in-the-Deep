@@ -142,7 +142,6 @@ button{font-family:var(--mono); cursor:pointer; touch-action:manipulation}
 #btnLayout{color:var(--amber);border-color:rgba(255,179,71,.35)}
 #btnSheet.on{background:linear-gradient(180deg,#17c9ad,#0e9a84);color:#032019;border-color:#7dffe9}
 
-/* mobile-only shells hidden on desktop */
 #mobileStatus,#contextBar,#sheetScrim,.sheet-only{display:none}
 
 #gameMain{flex:1;min-height:0;display:grid;
@@ -219,7 +218,6 @@ button{font-family:var(--mono); cursor:pointer; touch-action:manipulation}
 #turnBanner.green{background:linear-gradient(90deg,rgba(10,120,70,.92),rgba(61,255,156,.75));color:#032019;border:1px solid #a0ffd0;box-shadow:0 0 30px rgba(61,255,156,.5)}
 @keyframes bannerIn{0%{opacity:0;transform:translateX(-50%) translateY(-18px)}12%{opacity:1;transform:translateX(-50%) translateY(0)}80%{opacity:1;transform:translateX(-50%) translateY(0)}100%{opacity:0;transform:translateX(-50%) translateY(-8px)}}
 
-/* deploy bar sits OPPOSITE the active deployment zone so the zone stays tappable */
 #deployBar{position:absolute;left:50%;transform:translateX(-50%);z-index:7;display:flex;align-items:center;gap:10px;
   background:linear-gradient(180deg,rgba(13,42,68,.97),rgba(8,28,48,.97));border:1px solid var(--line2);padding:10px 14px;box-shadow:0 8px 30px rgba(0,0,0,.65);max-width:94%;flex-wrap:wrap;justify-content:center;top:14px;bottom:auto}
 #deployBar.at-top{top:14px;bottom:auto}
@@ -436,7 +434,6 @@ html[data-layout="mobile"] .dbtn{font-size:11px;padding:10px 16px}
 html[data-layout="mobile"] .brief-grid{grid-template-columns:1fr}
 html[data-layout="mobile"] #overStats{grid-template-columns:repeat(2,1fr)}
 
-/* sheet — lives inside #gameScreen so it shares its stacking context */
 html[data-layout="mobile"] #sheetScrim{display:block;position:fixed;inset:0;z-index:34;background:rgba(2,7,13,.5);animation:ovIn .18s}
 html[data-layout="mobile"] #gameScreen.sheet-open #topbar{z-index:36}
 html[data-layout="mobile"] #rightPanel{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:35;
@@ -467,7 +464,6 @@ html[data-layout="mobile"] #rightPanel .run-row{font-size:11px;padding:8px;color
 html[data-layout="mobile"] #rightPanel .ord-name{color:#7593aa}
 html[data-layout="mobile"] #logBox{height:150px}
 
-/* compact landscape: board left, controls right rail */
 html[data-layout="mobile"][data-orient="landscape"] #gameMain{
   display:grid;grid-template-columns:minmax(0,1fr) 224px;grid-template-rows:auto minmax(0,1fr);
   grid-template-areas:"board ctx" "board deck";gap:0}
@@ -539,7 +535,7 @@ html[data-layout="mobile"][data-orient="landscape"] .ctx-label{min-width:52px;fo
     <div>ORDERS: LOCATE AND DESTROY HOSTILE SSN.</div>
     <div class="tx-r">SILENCE IS SURVIVAL. NOISE IS DEATH.</div>
   </div>
-  <div class="menu-ver">DUEL IN THE DEEP · v1.5 · SINGLE-FILE BUILD</div>
+  <div class="menu-ver">DUEL IN THE DEEP · v1.6 · SINGLE-FILE BUILD</div>
 </section>
 
 <!-- ==================== GAME ==================== -->
@@ -735,7 +731,7 @@ html[data-layout="mobile"][data-orient="landscape"] .ctx-label{min-width:52px;fo
         <div class="brief-sec brief-wide">
           <h3><span class="hicon">◈</span>OBJECTIVE &amp; MODES</h3>
           <p>Two submarines hunt each other across a <b>30×20</b> grid. Each boat has <b>3 HP</b>. <span class="bl">BLUE</span> deploys in the bottom three rows, <span class="rd">RED</span> in the top three. Direct hits deal <b>2 damage</b>, indirect (adjacent blast) deals <b>1</b>; explosions chain through nearby torpedoes and mines.</p>
-          <p><b>SOLO PATROL</b> — you command BLUE against the computer. <b>HOT-SEAT DUEL</b> — two humans share one screen as BLUE and RED; an opaque hand-off screen hides the chart between turns so neither player sees the other's private picture. Before every match, each commander <b>picks their own starting tile</b> inside their deployment zone — the deployment panel always sits on the far side of the chart so your zone stays clear.</p>
+          <p><b>SOLO PATROL</b> — you command BLUE against the computer. Every hostile skipper has his own doctrine: some charge, some creep, some lay traps, some flood the water with false contacts. Read the box sizes, the torpedo bearings and the mine detonations to work out who you are fighting. <b>HOT-SEAT DUEL</b> — two humans share one screen as BLUE and RED; an opaque hand-off screen hides the chart between turns. Before every match, each commander <b>picks their own starting tile</b>; the deployment panel sits on the far side of the chart so your zone stays clear.</p>
         </div>
         <div class="brief-sec">
           <h3><span class="hicon">◈</span>THE TURN</h3>
@@ -764,7 +760,7 @@ html[data-layout="mobile"][data-orient="landscape"] .ctx-label{min-width:52px;fo
         </div>
         <div class="brief-sec">
           <h3><span class="hicon">◈</span>DECOYS &amp; MINES</h3>
-          <p><span class="wt">DECOYS</span> launch 4 cells out in a cardinal direction, then drift 4 cells/turn in a straight line. Each decoy emits its own <b>fake contact box</b> in your color — the enemy sees two of you. Decoys die at the board edge, on contact with a sub, or in any blast. 4 aboard.</p>
+          <p><span class="wt">DECOYS</span> launch 4 cells out in a cardinal direction, then drift 4 cells/turn in a straight line. Each decoy emits its own <b>fake contact box</b> in your color — the enemy sees two of you. Track which box drifts in a straight line and discard it. Decoys die at the board edge, on contact with a sub, or in any blast. 4 aboard.</p>
           <p><span class="yl">MINES</span> deploy to any of the 8 adjacent cells and are <b>invisible to the enemy</b>. An enemy sub crossing one takes a <b>direct 2-damage hit</b>. Torpedoes pass over mines harmlessly. 5 aboard. At 0, the mine button is dead for the match.</p>
         </div>
         <div class="brief-sec">
@@ -779,7 +775,7 @@ html[data-layout="mobile"][data-orient="landscape"] .ctx-label{min-width:52px;fo
         <div class="brief-sec">
           <h3><span class="hicon">◈</span>CONTROLS · DESKTOP &amp; TOUCH</h3>
           <p><b>Desktop:</b> <span class="kbd">1–4</span> tubes · <span class="kbd">R</span> reload · <span class="kbd">M</span> mine · <span class="kbd">S</span> sonar · <span class="kbd">L</span> launch · <span class="kbd">ENTER</span> end turn · <span class="kbd">P</span> plot · <span class="kbd">H</span> history · <span class="kbd">ESC</span> / right-click cancel · arrow keys step a guided torpedo or plot a heading.</p>
-          <p><b>Touch:</b> the interface switches to COMPACT automatically. The strip above the chart carries turn, both hulls and live noise. During torpedo guidance the direction pad steps the run one cell per tap. <b>MOVE</b> opens the heading pad: <b>tap an arrow to head that way, tap it again to extend one more cell</b> (max 4), tap the opposite arrow to shorten by one, and tap a perpendicular arrow to switch heading. Shorten to zero to clear the move. <b>CANCEL</b> replaces right-click, <b>MORE</b> opens the sonar station sheet, and <b>AUTO / COMPACT / FULL</b> forces either interface.</p>
+          <p><b>Touch:</b> the interface switches to COMPACT automatically. During torpedo guidance the direction pad steps the run one cell per tap. <b>MOVE</b> opens the heading pad: <b>tap an arrow to head that way, tap it again to extend one more cell</b> (max 4), tap the opposite arrow to shorten by one, and tap a perpendicular arrow to switch heading. Shorten to zero to clear the move. <b>CANCEL</b> replaces right-click, <b>MORE</b> opens the sonar station sheet, and <b>AUTO / COMPACT / FULL</b> forces either interface.</p>
         </div>
       </div>
     </div>
@@ -833,7 +829,7 @@ html[data-layout="mobile"][data-orient="landscape"] .ctx-label{min-width:52px;fo
 (function(){
 'use strict';
 /* ============================================================
-   DUEL IN THE DEEP — single-file submarine board duel  v1.5
+   DUEL IN THE DEEP — single-file submarine board duel  v1.6
    ============================================================ */
 const COLS=30, ROWS=20, HP=3;
 const $=id=>document.getElementById(id);
@@ -857,11 +853,62 @@ const SIDE_COL={player:'#3f9bff',enemy:'#ff4438'};
 const SIDE_HI={player:'#8cc6ff',enemy:'#ffb0a8'};
 const zoneRows=s=>s==='player'?[ROWS-3,ROWS-1]:[0,2];
 
+/* difficulty = competence only */
 const DIFF={
-  patrol:{label:'NOVICE',   jitter:.38, belJitter:3, speed:[1,2], sonarCd:5, torpCd:2, evade:.68},
-  engage:{label:'STANDARD', jitter:.16, belJitter:1, speed:[2,3], sonarCd:3, torpCd:1, evade:.5},
-  deep:  {label:'EXPERT',   jitter:.05, belJitter:0, speed:[3,4], sonarCd:2, torpCd:1, evade:.32}
+  patrol:{label:'NOVICE',  jitter:.38, belJitter:3, speed:[1,2], sonarCd:5, torpCd:2, blunder:.30, noticeFail:.34, senseR:4, maxRuns:1, temp:1.7},
+  engage:{label:'STANDARD',jitter:.16, belJitter:1, speed:[2,3], sonarCd:3, torpCd:1, blunder:.14, noticeFail:.14, senseR:6, maxRuns:2, temp:1.0},
+  deep:  {label:'EXPERT',  jitter:.05, belJitter:0, speed:[3,4], sonarCd:2, torpCd:1, blunder:.04, noticeFail:.03, senseR:8, maxRuns:3, temp:.5}
 };
+
+/* profile = doctrine only (never surfaced to the player) */
+const PROFILES={
+  hunter:{range:[3,8], move:'close', noiseCap:12, fireRange:16, mineStyle:'none', sonarStyle:'confirm',
+    aggression:.82, hurt:.28, sonarCd:3, torpCd:1, decoyDir:'toward',
+    w:{torpedo:10,sonar:4,mine:1,decoy:1,reloadTorp:6,reloadDecoy:1,hold:.5},
+    deck:{patrol:3,engage:2,deep:1}},
+  ghost:{range:[2,6], move:'creep', noiseCap:3, fireRange:8, mineStyle:'lane', sonarStyle:'avoid',
+    aggression:.26, hurt:-.5, sonarCd:7, torpCd:2, decoyDir:'away',
+    w:{torpedo:7,sonar:.6,mine:5,decoy:3,reloadTorp:5,reloadDecoy:3,hold:4},
+    deck:{patrol:1,engage:2,deep:3}},
+  skirmisher:{range:[9,13], move:'kite', noiseCap:8, fireRange:18, mineStyle:'screen', sonarStyle:'hunt',
+    aggression:.52, hurt:-.3, sonarCd:3, torpCd:1, decoyDir:'cross',
+    w:{torpedo:9,sonar:6,mine:4,decoy:6,reloadTorp:6,reloadDecoy:5,hold:1},
+    deck:{patrol:2,engage:2,deep:2}},
+  deceiver:{range:[5,11], move:'flank', noiseCap:12, fireRange:14, mineStyle:'none', sonarStyle:'confirm',
+    aggression:.56, hurt:-.2, sonarCd:4, torpCd:1, decoyDir:'cross', erratic:true,
+    w:{torpedo:7,sonar:3,mine:1.5,decoy:10,reloadTorp:5,reloadDecoy:8,hold:1},
+    deck:{patrol:2,engage:2,deep:2}},
+  trapper:{range:[4,10], move:'flank', noiseCap:7, fireRange:12, mineStyle:'lane', sonarStyle:'confirm',
+    aggression:.46, hurt:-.15, sonarCd:4, torpCd:2, decoyDir:'cross',
+    w:{torpedo:5,sonar:4,mine:10,decoy:2,reloadTorp:5,reloadDecoy:2,hold:1},
+    deck:{patrol:2,engage:2,deep:2}},
+  sentinel:{range:[3,9], move:'hold', noiseCap:2, fireRange:10, mineStyle:'perimeter', sonarStyle:'avoid',
+    aggression:.22, hurt:.6, sonarCd:6, torpCd:1, decoyDir:'away',
+    w:{torpedo:6,sonar:2,mine:8,decoy:5,reloadTorp:5,reloadDecoy:4,hold:5},
+    deck:{patrol:1,engage:2,deep:3}}
+};
+const PROFILE_IDS=Object.keys(PROFILES);
+const AiBag={
+  read(){ try{ const v=JSON.parse(LS.get('dd_aibag','null')); if(v&&Array.isArray(v.deck)) return v; }catch(e){} return {deck:[],last:null}; },
+  write(o){ LS.set('dd_aibag',JSON.stringify(o)); },
+  deal(diff){
+    const st=this.read();
+    if(!st.deck.length){
+      const d=[];
+      for(const id of PROFILE_IDS){ const n=(PROFILES[id].deck[diff]||1); for(let i=0;i<n;i++) d.push(id); }
+      for(let i=d.length-1;i>0;i--){ const j=randInt(0,i); const t=d[i]; d[i]=d[j]; d[j]=t; }
+      st.deck=d;
+    }
+    let id=st.deck.pop();
+    if(!id) id=PROFILE_IDS[randInt(0,PROFILE_IDS.length-1)];
+    if(id===st.last&&st.deck.length){ const j=randInt(0,st.deck.length-1); const t=st.deck[j]; st.deck[j]=id; id=t; }
+    st.last=id; this.write(st);
+    const base=PROFILES[id], w={};
+    for(const k in base.w) w[k]=Math.max(.2, base.w[k]*(0.88+rnd()*0.24));
+    return Object.assign({},base,{w,range:base.range.slice(),id});
+  }
+};
+
 const COLORS={blue:'#3f9bff',blueHi:'#8cc6ff',teal:'#19e3c2',red:'#ff4438',redHi:'#ff9d95',orange:'#ff9425',yellow:'#ffd21f',white:'#f4f9fd',green:'#3dff9c',amber:'#ffb347',steel:'#7fa3bd'};
 const PLOT_COLORS={contact:COLORS.red,danger:COLORS.amber,nav:COLORS.teal};
 const PLOT_PREFIX={contact:'C',danger:'D',nav:'N'};
@@ -1251,6 +1298,7 @@ function damage(sub,n,type,srcSide){
   if(sub.hp<=0) return;
   sub.hp=Math.max(0,sub.hp-n);
   sub.lastHitTurn=S.turn;
+  if(S.mode==='solo'&&S.ai) S.ai.lastContactTurn=S.turn;
   popFx(sub.x,sub.y,'-'+n+' '+(type==='direct'?'DIRECT':'BLAST'),sub.side==='player'?COLORS.red:COLORS.amber);
   st(sub.side).taken+=n;
   if(srcSide) st(srcSide).hits++;
@@ -1413,8 +1461,12 @@ function recomputeEst(side){
   if(rect) pushHistory(oth,rect,locked?'LOCK':'EST');
   if(side==='player'&&rect&&!locked&&S.mode==='solo'){
     const D=DIFF[S.diff];
-    S.ai.belief={ x:clamp(rect.x+Math.floor(rect.size/2)+randInt(-D.belJitter,D.belJitter),0,COLS-1),
-                  y:clamp(rect.y+Math.floor(rect.size/2)+randInt(-D.belJitter,D.belJitter),0,ROWS-1) };
+    const cx=rect.x+Math.floor(rect.size/2), cy=rect.y+Math.floor(rect.size/2);
+    S.ai.belief={ x:clamp(cx+randInt(-D.belJitter,D.belJitter),0,COLS-1),
+                  y:clamp(cy+randInt(-D.belJitter,D.belJitter),0,ROWS-1) };
+    S.ai.beliefTurn=S.turn;
+    S.ai.track.push({x:cx,y:cy,turn:S.turn});
+    while(S.ai.track.length>4) S.ai.track.shift();
   }
 }
 function recomputeDecoyEsts(side){
@@ -1646,10 +1698,7 @@ function togglePlot(x,y){
   refreshUI();
 }
 
-/* ================= MOVE PAD (repeat-tap heading) =================
-   same arrow  -> extend one cell (max 4)
-   opposite    -> shorten one cell (to zero = clear)
-   other arrow -> switch heading, distance 1                        */
+/* ================= MOVE PAD ================= */
 function plotMoveDir(dx,dy){
   if(!movePadAllowed()) return;
   const side=S.side, sel=selOf(side), p=subOf(side), mc=legalMoveCells(side);
@@ -1862,7 +1911,7 @@ async function endTurn(){
   nextTurn();
 }
 
-/* ================= ENEMY AI (solo only) ================= */
+/* ================= ENEMY AI — doctrine profiles ================= */
 function aiTorpedoCell(t,target){
   const opts=torpedoSteps(t);
   if(!opts.length) return null;
@@ -1875,32 +1924,170 @@ function aiTorpedoCell(t,target){
   }
   return best;
 }
-function enemyMovePlan(e,target,maxDist,evadeFrom){
-  let best=null,bs=evadeFrom?-1e9:1e9;
-  const cur=evadeFrom?cheb(e,evadeFrom):cheb(e,target);
+function aiPredict(){
+  const tr=S.ai.track;
+  if(!tr||tr.length<2) return S.ai.belief;
+  const a=tr[tr.length-2], b=tr[tr.length-1];
+  const dt=Math.max(1,b.turn-a.turn);
+  const vx=(b.x-a.x)/dt, vy=(b.y-a.y)/dt;
+  return {x:clamp(Math.round(b.x+vx*1.5),0,COLS-1), y:clamp(Math.round(b.y+vy*1.5),0,ROWS-1)};
+}
+function aiMineCell(e,belief,style){
+  const cells=[];
+  for(let dy=-1;dy<=1;dy++) for(let dx=-1;dx<=1;dx++){
+    if(!dx&&!dy) continue;
+    const nx=e.sx+dx, ny=e.sy+dy;
+    if(inB(nx,ny)&&!mineAt(nx,ny,'enemy')&&!subAt(nx,ny,'enemy')) cells.push({x:nx,y:ny,dx,dy});
+  }
+  if(!cells.length) return null;
+  const aim=style==='lane'?aiPredict():(belief||aiPredict());
+  if(!aim) return cells[randInt(0,cells.length-1)];
+  const bx=Math.sign(aim.x-e.sx), by=Math.sign(aim.y-e.sy);
+  let best=null,bs=-1e9;
+  for(const c of cells){
+    const dot=c.dx*bx+c.dy*by;
+    const cross=Math.abs(c.dx*by-c.dy*bx);
+    let s;
+    if(style==='perimeter') s=-dot*1.2+cross*.3;
+    else if(style==='screen') s=cross*1.3+dot*.35;
+    else s=dot*1.2+cross*.2;
+    s+=rnd()*.45;
+    if(s>bs){ bs=s; best=c; }
+  }
+  return best;
+}
+function aiDecoyDir(e,belief,P){
+  const dirs=DIRS.filter(d=>inB(e.sx+d[0]*4,e.sy+d[1]*4));
+  if(!dirs.length) return null;
+  const bx=belief?Math.sign(belief.x-e.sx):0, by=belief?Math.sign(belief.y-e.sy):0;
+  let best=null,bs=-1e9;
+  for(const d of dirs){
+    const dot=d[0]*bx+d[1]*by, cross=d[0]*by-d[1]*bx;
+    let s;
+    if(P.decoyDir==='away') s=-dot*1.3;
+    else if(P.decoyDir==='toward') s=dot*1.1;
+    else s=Math.abs(cross)*1.2+cross*S.ai.flank*.6;
+    s+=rnd()*.5;
+    if(s>bs){ bs=s; best=d; }
+  }
+  S.ai.flank=-S.ai.flank;
+  return best;
+}
+function aiPlanMove(e,target,maxDist,mode,band,awayFrom){
+  if(maxDist<=0||(!target&&!awayFrom)) return {dx:0,dy:0,dist:0};
+  const ideal=band?(band[0]+band[1])/2:0;
+  const score=(pt,d)=>{
+    if(awayFrom) return cheb(pt,awayFrom)*1.25;
+    const dd=cheb(pt,target);
+    if(mode==='close') return -dd;
+    if(mode==='creep') return -dd*.8-d*.5;
+    if(mode==='kite') return -Math.abs(dd-ideal)*1.3;
+    if(mode==='flank'){
+      const bx=Math.sign(target.x-e.x), by=Math.sign(target.y-e.y);
+      return -Math.abs(dd-ideal)*1.1;
+    }
+    return -d;
+  };
+  let best=null,bs=-1e9;
   for(const [dx,dy] of DIRS){
     let x=e.x,y=e.y,d=0;
     for(let i=1;i<=maxDist;i++){
-      const nx=e.x+dx*i,ny=e.y+dy*i;
+      const nx=e.x+dx*i, ny=e.y+dy*i;
       if(!inB(nx,ny)) break;
       if(subAt(nx,ny,'player')) break;
-      const tp=torpAt(nx,ny);
-      if(tp) break;
+      if(torpAt(nx,ny)) break;
       x=nx;y=ny;d=i;
     }
     if(d===0) continue;
-    let s=(evadeFrom?cheb({x,y},evadeFrom):cheb({x,y},target))+rnd()*.6;
-    if(evadeFrom? s>bs : s<bs){ bs=s; best={dx,dy,dist:d}; }
+    let s=score({x,y},d);
+    if(mode==='flank'&&!awayFrom&&target){
+      const bx=Math.sign(target.x-e.x), by=Math.sign(target.y-e.y);
+      s+=Math.abs(dx*by-dy*bx)*1.15*S.ai.flank*0+Math.abs(dx*by-dy*bx)*1.15;
+    }
+    s+=rnd()*.6;
+    if(s>bs){ bs=s; best={dx,dy,dist:d}; }
   }
-  if(!best) return {dx:0,dy:0,dist:0};
-  if(evadeFrom){ if(bs<=cur) return {dx:0,dy:0,dist:0}; }
-  else if(bs>=cur&&rnd()<.6) return {dx:0,dy:0,dist:0};
+  const stay=score(e,0)+.4;
+  if(!best||bs<stay) return {dx:0,dy:0,dist:0};
   return best;
 }
+function aiPosture(e,P,threatened){
+  const base=(P.aggression-.5)*2;
+  S.ai.posture+=(base-S.ai.posture)*.25;
+  if(S.turn-e.lastHitTurn<=1) S.ai.posture+=P.hurt*.6;
+  if(threatened) S.ai.posture+=P.hurt*.3;
+  if(e.hp>S.subs.player.hp) S.ai.posture+=.08;
+  else if(e.hp<S.subs.player.hp) S.ai.posture+=P.hurt*.2;
+  const quiet=S.turn-(S.ai.lastContactTurn||0);
+  if(S.turn>=9&&quiet>=5) S.ai.posture+=.14;
+  S.ai.posture=clamp(S.ai.posture,-1,1);
+  return S.ai.posture;
+}
+function aiChoose(e,belief,dist,detected,threatened,D,P){
+  const post=S.ai.posture;
+  const stale=S.turn-(S.ai.beliefTurn||0);
+  const runs=S.torps.filter(t=>t.side==='enemy').length;
+  const torpTube=S.enemyTubes.findIndex(t=>t.load==='torpedo');
+  const decoyTube=S.enemyTubes.findIndex(t=>t.load==='decoy');
+  const emptyTube=S.enemyTubes.findIndex(t=>t.load==='empty');
+  const liveDecoys=S.decoys.filter(d=>d.side==='enemy').length;
+  const cand=[];
+  const add=(kind,tube,s)=>{ if(s>0) cand.push({kind,tube,score:s+rnd()*D.temp*2.2}); };
+  const ideal=(P.range[0]+P.range[1])/2;
+
+  if(torpTube>=0&&S.ai.torpCd<=0&&runs<D.maxRuns&&dist<=P.fireRange){
+    let s=P.w.torpedo*(1+post*.6);
+    if(detected) s*=1.5;
+    s*=1+Math.max(0,1-Math.abs(dist-ideal)/12)*.5;
+    if(threatened) s*=1.15+post*.6;
+    if(stale>2&&!detected) s*=.6;
+    add('torpedo',torpTube,s);
+  }
+  if(S.ai.sonarCd<=0&&!detected){
+    let s=P.w.sonar;
+    if(P.sonarStyle==='avoid') s*=.15;
+    s*=1+Math.min(2,stale*.35);
+    s*=dist<=9?1.4:.5;
+    if(P.noiseCap<=3) s*=.4;
+    add('sonar',-1,s);
+  }
+  if(S.enemyReserves.mines>0&&aiMineCell(e,belief,P.mineStyle)){
+    let s=P.w.mine;
+    if(P.mineStyle==='perimeter') s*=threatened?1.7:1.15;
+    else if(P.mineStyle==='lane') s*=dist<=12?1.35:.5;
+    else if(P.mineStyle==='screen') s*=(dist>=6&&dist<=15)?1.35:.6;
+    else s*=.5;
+    if(S.enemyReserves.mines<=1) s*=.7;
+    add('mine',-1,s);
+  }
+  if(decoyTube>=0){
+    let s=P.w.decoy*(1-post*.45);
+    if(threatened) s*=1.7;
+    if(liveDecoys>=2) s*=.45;
+    add('decoy',decoyTube,s);
+  }
+  if(emptyTube>=0){
+    let s=P.w.reloadTorp*(1+post*.4)*(torpTube<0?1:.25);
+    if(runs>=D.maxRuns) s*=.5;
+    add('reloadTorpedo',emptyTube,s);
+    if(S.enemyReserves.decoys>0&&decoyTube<0){
+      let d=P.w.reloadDecoy*(1-post*.4);
+      if(threatened) d*=1.4;
+      add('reloadDecoy',emptyTube,d);
+    }
+  }
+  add('hold',-1,P.w.hold*(1-post*.7)+(P.noiseCap<=3?1.5:0)+.2);
+  if(!cand.length) return {kind:'hold',tube:-1};
+  cand.sort((a,b)=>b.score-a.score);
+  if(cand.length>1&&rnd()<D.blunder) return cand[1];
+  return cand[0];
+}
+
 async function enemyTurn(){
   const mid=S.matchId;
   S.side='enemy'; S.view='player'; S.busy=true;
   const e=subOf('enemy'), p=subOf('player'), D=DIFF[S.diff];
+  const P=S.ai.profile||PROFILES.hunter;
   e.sx=e.x; e.sy=e.y;
   setNoise('enemy',0);
   banner('ENEMY TURN','red');
@@ -1929,32 +2116,11 @@ async function enemyTurn(){
   const detected=detectedNow();
   const belief=detected?{x:p.x,y:p.y}:(S.ai.belief||{x:randInt(4,25),y:17});
   const dist=cheb(e,belief);
-  const nearTorp=S.torps.find(t=>t.side==='player'&&cheb(t,e)<=6);
-  const threatened=(S.turn-e.lastHitTurn<=1)||!!nearTorp;
-  const torpTube=S.enemyTubes.findIndex(t=>t.load==='torpedo');
-  const decoyTube=S.enemyTubes.findIndex(t=>t.load==='decoy');
-  const emptyTube=S.enemyTubes.findIndex(t=>t.load==='empty');
-  let action=null, evade=false, moveMax=randInt(D.speed[0],D.speed[1]);
-
-  if(threatened&&rnd()<D.evade){
-    evade=true; moveMax=1;
-    if(decoyTube>=0) action={kind:'decoy',tube:decoyTube};
-    else if(emptyTube>=0&&S.enemyReserves.decoys>0&&rnd()<.55) action={kind:'reloadDecoy',tube:emptyTube};
-    else if(torpTube>=0&&rnd()<.5) action={kind:'torpedo',tube:torpTube};
-    else if(emptyTube>=0) action={kind:'reloadTorpedo',tube:emptyTube};
-  }else if(threatened&&torpTube>=0){
-    action={kind:'torpedo',tube:torpTube}; moveMax=1;
-  }else if(dist<=9&&S.ai.sonarCd<=0&&!detected){
-    action={kind:'sonar'}; S.ai.sonarCd=D.sonarCd; moveMax=rnd()<.5?0:1;
-  }else if(torpTube>=0&&dist<=14&&S.ai.torpCd<=0){
-    action={kind:'torpedo',tube:torpTube}; S.ai.torpCd=D.torpCd;
-  }else if(S.turn%4===2&&S.enemyReserves.mines>0&&dist<=12){
-    action={kind:'mine'};
-  }else if(torpTube<0&&emptyTube>=0){
-    action={kind:'reloadTorpedo',tube:emptyTube};
-  }else if(decoyTube<0&&emptyTube>=0&&S.enemyReserves.decoys>0&&rnd()<.18){
-    action={kind:'reloadDecoy',tube:emptyTube};
-  }
+  const nearTorp=S.torps.find(t=>t.side==='player'&&cheb(t,e)<=D.senseR);
+  const threatened=((S.turn-e.lastHitTurn<=1)||!!nearTorp)&&rnd()>D.noticeFail;
+  const post=aiPosture(e,P,threatened);
+  const pick=aiChoose(e,belief,dist,detected,threatened,D,P);
+  const action=pick.kind==='hold'?null:pick;
 
   let actNoise=0;
   if(action){
@@ -1970,6 +2136,7 @@ async function enemyTurn(){
         S.enemyTubes[action.tube].torpId=t.id;
         S.torps.push(t);
         st('enemy').fired++;
+        S.ai.torpCd=Math.max(D.torpCd,P.torpCd);
         A.noise({ft:'bandpass',f0:400,q:1.5,dur:.3,vol:.07,pan:panFor(e.sx)});
         let tgt=detected?{x:p.x,y:p.y}:{x:clamp(belief.x+randInt(-D.belJitter,D.belJitter),0,COLS-1),y:clamp(belief.y+randInt(-D.belJitter,D.belJitter),0,ROWS-1)};
         for(let s=0;s<5;s++){
@@ -1993,25 +2160,21 @@ async function enemyTurn(){
       actNoise=8;
       S.enemyTubes[action.tube].load='empty';
       st('enemy').decoys++;
-      const dirs=DIRS.slice().sort((a,b)=>{
-        const ra=inB(e.sx+a[0]*4,e.sy+a[1]*4)?1:0, rb=inB(e.sx+b[0]*4,e.sy+b[1]*4)?1:0;
-        return rb-ra||rnd()-.5;
-      });
-      const d0=dirs.find(d=>inB(e.sx+d[0]*4,e.sy+d[1]*4));
+      const d0=aiDecoyDir(e,belief,P);
       if(d0){
-        const dx=d0[0],dy=d0[1];
-        const dd={id:S.nextId++,side:'enemy',x:e.sx+dx*4,y:e.sy+dy*4,dx,dy,fresh:true,est:null};
+        const dd={id:S.nextId++,side:'enemy',x:e.sx+d0[0]*4,y:e.sy+d0[1]*4,dx:d0[0],dy:d0[1],fresh:true,est:null};
         if(!subAt(dd.x,dd.y)){ S.decoys.push(dd); log('Acoustic anomaly — a second contact box appears…','warn'); }
       }
     }else if(action.kind==='mine'){
-      actNoise=3;
-      S.enemyReserves.mines--; st('enemy').mines++;
-      const dx=Math.sign(belief.x-e.sx), dy=Math.sign(belief.y-e.sy);
-      let mx=e.sx+(dx||0), my=e.sy+(dy||0);
-      if(!inB(mx,my)||(mx===e.sx&&my===e.sy)){ mx=e.sx+1; my=e.sy; }
-      if(inB(mx,my)&&!mineAt(mx,my,'enemy')) S.mines.push({id:S.nextId++,side:'enemy',x:mx,y:my});
+      const mc=aiMineCell(e,belief,P.mineStyle);
+      if(mc){
+        actNoise=3;
+        S.enemyReserves.mines--; st('enemy').mines++;
+        S.mines.push({id:S.nextId++,side:'enemy',x:mc.x,y:mc.y});
+      }
     }else if(action.kind==='sonar'){
       actNoise=8; st('enemy').pings++;
+      S.ai.sonarCd=Math.max(D.sonarCd,P.sonarCd);
       A.ping(.09,true,panFor(e.x));
       log('Distant sonar ping detected — bearing unknown.','warn');
       if(cheb(e,p)<=8){
@@ -2031,8 +2194,19 @@ async function enemyTurn(){
     }
   }
 
+  const evade=threatened&&post<-.1;
   const threatSrc=nearTorp||belief;
-  const plan=enemyMovePlan(e,belief,moveMax,evade?threatSrc:null);
+  const quiet=S.turn-(S.ai.lastContactTurn||0);
+  const pressure=(S.turn>=9&&quiet>=5)?Math.min(6,(quiet-4)):0;
+  let cap=P.noiseCap+Math.round(post*2)+pressure;
+  let spd=randInt(D.speed[0],D.speed[1]);
+  if(P.erratic){ S.ai.erratic=1-S.ai.erratic; if(S.ai.erratic) spd=D.speed[1]; else spd=0; cap=Math.max(cap,spd+actNoise); }
+  let maxMove=clamp(Math.min(spd,cap-actNoise),0,4);
+  let mode=P.move;
+  if(P.move==='creep') maxMove=Math.min(maxMove,1);
+  if(P.move==='hold'&&!evade) maxMove=Math.min(maxMove,pressure>0?1:0);
+  if(evade) maxMove=Math.max(maxMove,1);
+  const plan=aiPlanMove(e,belief,maxMove,evade?'evade':mode,P.range,evade?threatSrc:null);
   if(plan.dist>0){
     A.engine(plan.dist,.045,panFor(e.x));
     moveSubAlong(e,{x:e.x+plan.dx*plan.dist,y:e.y+plan.dy*plan.dist},'enemy');
@@ -2315,7 +2489,7 @@ function newMatch(){
     sel:freshSel(), selE:freshSel(),
     noise:{player:0}, enemyNoise:0,
     detectedBy:{player:0,enemy:0},
-    ai:{belief:null,sonarCd:2,torpCd:1},
+    ai:{belief:null,beliefTurn:0,track:[],sonarCd:2,torpCd:1,profile:null,posture:0,lastContactTurn:0,flank:1,erratic:0},
     stats:{player:blankStats(),enemy:blankStats()},
     plotsBy:{player:[],enemy:[]}, historyBy:{player:[],enemy:[]},
     plotMode:false, plotKind:'contact', showHistory:true, nextPlotId:1,
@@ -2323,6 +2497,10 @@ function newMatch(){
     movePad:false,
     nextId:1
   },keep);
+  if(S.mode==='solo'){
+    S.ai.profile=AiBag.deal(S.diff);
+    S.ai.posture=(S.ai.profile.aggression-.5)*2;
+  }
   B.wakes=[]; B.fadeEsts=[]; B.shake=0; B.hurt=0; B.hover=null;
   $('logBox').innerHTML='';
   closeSheet();
